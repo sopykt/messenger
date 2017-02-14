@@ -43,7 +43,9 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
 	    if (text === 'ဖျားနေလို့') {
-		sendTextMessage(sender, "ဆေးခန်းသွားပြလေ"
+		sendTextMessage(sender, "ဆေးခန်းသွားပြလေ")
+		continue
+	    }
             sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
         }
     }
