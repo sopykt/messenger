@@ -39,7 +39,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = event.message.text
 	    if (text === 'Hi') {
-               sendTextMessage(sender, "Hi, I am \"Health Info Robot.\" You can ask any Health related questions. I can understand English and Burmese\(unicode and zawgyi\)")
+               sendTextMessage(sender, "Hi, I am \"Health Info Robot.\" You can ask any Health related questions. I can understand English and Burmese \(unicode and zawgyi\)")
                 continue
             }
 	    if (text === 'ခေါင်းကိုက်ခြင်း') {
