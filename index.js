@@ -42,6 +42,14 @@ app.post('/webhook/', function (req, res) {
                sendTextMessage(sender, "Hi, I am \"Health Info Robot.\" You can ask any Health related questions. I can understand English and Burmese \(unicode and zawgyi\)")
                 continue
             }
+	    if (text === 'မဂၤလာပါ') {
+               sendTextMessage(sender, "မဂၤလာပါ")
+                continue
+            }
+	    if (text === 'မင်္ဂလာပါ') {
+               sendTextMessage(sender, "မင်္ဂလာပါ")
+                continue
+            }
 	    if (text === 'ခေါင်းကိုက်ခြင်း') {
                sendTextMessage(sender, "ေခါင်းကိုက်လို့လား")
                 continue
