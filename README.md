@@ -67,7 +67,4 @@ You can also skip the whole thing by git cloning this repository, running npm in
 
     -
 
-    ```  
-
-    
-        				
+    ```
