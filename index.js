@@ -43,7 +43,7 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             if (text === 'ရင္ဘတ္ေအာင့္ျခင္း') {
-               sendTextMessage(ရင္ဘတ္ေအာင့္တာဟာ အေၾကာင္းအမ်ိဳးမ်ိဳးေၾကာင့္ျဖစ္ႏိုင္ပါတယ္")
+               sendTextMessage("ရင္ဘတ္ေအာင့္တာဟာအေၾကာင္းအမ်ိဳးမ်ိဳးေၾကာင့္ျဖစ္ႏိုင္ပါတယ္")
                 continue
             }
             if (text === 'Hello') {
