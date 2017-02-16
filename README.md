@@ -58,10 +58,10 @@ You can also skip the whole thing by git cloning this repository, running npm in
 7. Now you are ready and start editing. When finished push back your edited code to heroku repo by doing this.
 
     ```
-    git init
-    git add .
-    git commit --message 'that what edited'
-    git push heroku master
+git init
+git add .
+git commit --message 'that what edited'
+git push heroku master
     ```
 
     
