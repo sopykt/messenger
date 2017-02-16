@@ -56,7 +56,7 @@ You can also skip the whole thing by git cloning this repository, running npm in
     git remote add heroku https://git.heroku.com/secret-woodland-76421.git
     ```
 7. Now you are ready and start editing. When finished push back your edited code to heroku repo by doing this.
-  ```
+    ```
     git init
 
     git add .
@@ -64,7 +64,5 @@ You can also skip the whole thing by git cloning this repository, running npm in
     git commit -m 'that what edited'
 
     git push heroku master
-
-    -
 
     ```
