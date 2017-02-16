@@ -71,7 +71,11 @@ app.post('/webhook/', function (req, res) {
 		sendTextMessage(sender, "ဆေးခန်းသွားပြလေ")
 		continue
 	    }
-	    if (text === 'Generic') {
+	   if (text === 'ေနမေကာင္းဘူး') {
+               sendTextMessage(sender, "ဘယ္လိုေနမေကာင္းတာလဲ")
+                continue
+            } 
+	   if (text === 'Generic') {
 		sendGenericMessage(sender)
 		continue
 	    }
