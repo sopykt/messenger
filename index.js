@@ -82,6 +82,11 @@ app.post('/webhook/', function (req, res) {
 		sendGenericMessage(sender)
 		continue
 	    }
+            if (event.postback) {
+            let text = JSON.stringify(event.postback)
+            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+            continue
+            }
             if (postback === 'Payload for first element in a generic bubble') {
                 sendTextMessage(sender, "Good")
                 continue
