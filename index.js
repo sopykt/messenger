@@ -54,7 +54,6 @@ app.post('/webhook/', function (req, res) {
                sendTextMessage(sender, "မဂၤလာပါ")
                 continue
             }
-            
 	    if (text === 'မင်္ဂလာပါ') {
                sendTextMessage(sender, "မင်္ဂလာပါ")
                 continue
@@ -71,11 +70,15 @@ app.post('/webhook/', function (req, res) {
 		sendTextMessage(sender, "ဆေးခန်းသွားပြလေ")
 		continue
 	    }
-	   if (text === 'ေနမေကာင္းဘူး') {
+	    if (text === 'ေနမေကာင္းဘူး') {
                sendTextMessage(sender, "ဘယ္လိုေနမေကာင္းတာလဲ")
                 continue
+            }
+            if (text === 'သဲေလး') {
+               sendTextMessage(sender, "ရွင့္")
+                continue
             } 
-	   if (text === 'Generic') {
+	    if (text === 'Generic') {
 		sendGenericMessage(sender)
 		continue
 	    }
