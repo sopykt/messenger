@@ -82,11 +82,13 @@ app.post('/webhook/', function (req, res) {
 		sendGenericMessage(sender)
 		continue
 	    }
+            //postback ko click yin reply pyan bo
             if (event.postback) {
             let text = JSON.stringify(event.postback)
             sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
             continue
             }
+            //postback ko click yin reply pyan bo
             if (postback === 'Payload for first element in a generic bubble') {
                 sendTextMessage(sender, "Good")
                 continue
