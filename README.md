@@ -53,8 +53,9 @@ You can also skip the whole thing by git cloning this repository, running npm in
     git clone https://github.com/sopykt/messenger.git
     ```
 6. Add my heroku repo 
+    
     ```
-    git remote add heroku https://git.heroku.com/secret-woodland-76421.git
+    git remote add heroku https://git.heroku.com/serene-badlands-46223.git
     ```
 7. Now you are ready and start editing. When finished push back your edited code to heroku repo by doing this. You might not need `git init` if you already done it once.
     ```
