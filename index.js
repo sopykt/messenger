@@ -1,3 +1,8 @@
+//This is still work in progress
+/*
+Please report any bugs to nicomwaks@gmail.com
+i have added console.log on line 48 
+ */
 'use strict'
 
 const express = require('express')
@@ -7,187 +12,125 @@ const app = express()
 
 app.set('port', (process.env.PORT || 5000))
 
-// Process application/x-www-form-urlencoded
+// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
 
-// Process application/json
+// parse application/json
 app.use(bodyParser.json())
 
-// Index route
+// index
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+	res.send('hello world i am a secret bot')
 })
 
-// for Facebook verification
+// for facebook verification
 app.get('/webhook/', function (req, res) {
-    if (req.query['hub.verify_token'] === 'mynameissopykt') {
-        res.send(req.query['hub.challenge'])
-    }
-    res.send('Error, wrong token')
+	if (req.query['hub.verify_token'] === 'mynameissopykt') {
+		res.send(req.query['hub.challenge'])
+	} else {
+		res.send('Error, wrong token')
+	}
 })
 
-// Spin up the server
-app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
-})
-// to response by text
+// to post data
 app.post('/webhook/', function (req, res) {
-    let messaging_events = req.body.entry[0].messaging
-    for (let i = 0; i < messaging_events.length; i++) {
-        let event = req.body.entry[0].messaging[i]
-        let sender = event.sender.id
-        if (event.message && event.message.text) {
-            let text = event.message.text
-	    if (text === 'Hi') {
-               sendTextMessage(sender, "Hi, I am \"Health Info Robot.\" You can ask any Health related questions. I can understand English and Burmese \(unicode and zawgyi\)")
-                continue
-            }
-            if (text === 'ရင္ဘတ္ေအာင့္ျခင္း') {
-               sendTextMessage(sender, "ရင္ဘတ္ေအာင့္တာဟာအေၾကာင္းအမ်ိဳးမ်ိဳးေၾကာင့္ျဖစ္ႏိုင္ပါတယ္")
-                continue
-            }
-            if (text === 'Hello') {
-               sendTextMessage(sender, "Hi, I am \"Health Info Robot.\" You can ask any Health related questions. I can understand English and Burmese \(unicode and zawgyi\)")
-                continue
-            }
-	    if (text === 'မဂၤလာပါ') {
-               sendTextMessage(sender, "မဂၤလာပါ")
-                continue
-            }
-	    if (text === 'မင်္ဂလာပါ') {
-               sendTextMessage(sender, "မင်္ဂလာပါ")
-                continue
-            }
-	    if (text === 'ခေါင်းကိုက်ခြင်း') {
-               sendTextMessage(sender, "ေခါင်းကိုက်လို့လား")
-                continue
-            }
-	    if (text === 'ေခါင္းကိုက္ျခင္း') {
-               sendTextMessage(sender, "ေခါင္းကိုက္လို့လား")
-                continue
-            }
-	    if (text === 'ဖျားနေလို့') {
-		sendTextMessage(sender, "ဆေးခန်းသွားပြလေ")
-		continue
-	    }
-	    if (text === 'ေနမေကာင္းဘူး') {
-               sendTextMessage(sender, "ဘယ္လိုေနမေကာင္းတာလဲ")
-                continue
-            }
-            if (text === 'သဲေလး') {
-               sendTextMessage(sender, "ရွင့္")
-                continue
-            } 
-	    if (text === 'Generic') {
-		sendGenericMessage(sender)
-		continue
-	    }
-//postback ko click yin reply pyan bo
-            if (event.postback) {
-            let text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-            continue
-            }
-//postback ko click yin reply pyan bo
-            if (postback === 'Payload for first element in a generic bubble') {
-                sendTextMessage(sender, "Good")
-                continue
-            }
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-        }
-    }
-    res.sendStatus(200)
+	let messaging_events = req.body.entry[0].messaging
+	for (let i = 0; i < messaging_events.length; i++) {
+		let event = req.body.entry[0].messaging[i]
+		let sender = event.sender.id
+		if (event.message && event.message.text) {
+			let text = event.message.text
+			if (text === 'Generic'){ 
+				console.log("welcome to chatbot")
+				//sendGenericMessage(sender)
+				continue
+			}
+			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+		}
+		if (event.postback) {
+			let text = JSON.stringify(event.postback)
+			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+			continue
+		}
+	}
+	res.sendStatus(200)
 })
 
-// to send Generic message
-app.post('/webhook/', function (req, res) {
-    let messaging_events = req.body.entry[0].messaging
-    for (let i = 0; i < messaging_events.length; i++) {
-        let event = req.body.entry[0].messaging[i]
-        let sender = event.sender.id
-        if (event.message && event.message.text) {
-            let text = event.message.text
-            if (text === 'Generic') {
-                sendGenericMessage(sender)
-                continue
-            }
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-        }
-        if (event.postback) {
-         let text = JSON.stringify(event.postback)
-         sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-         continue
-      }
-    }
-    res.sendStatus(200)
-})
 
+// recommended to inject access tokens as environmental variables, e.g.
+// const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = "EAAKmoTE0jJsBAMZAhjl0xbcrQGCCjf7b9NuZA5GcjXrO4qkew6FW1xvpT6KZCjY8rsRjePY1boMw6IGbMRFzcBDjjzUPEf5oBGWWxAjd3GdkBQD6LjZCzi4MXv2J6pLPXZAIt4CBl651M3xo2WKzuk0HHsTZCZCjSSCyvvirxleuwZDZD"
 
 function sendTextMessage(sender, text) {
-    let messageData = { text:text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+	let messageData = { text:text }
+	
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
 
 function sendGenericMessage(sender) {
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "First card",
-                    "subtitle": "Element #1 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "web url"
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
-                    }],
-                }, {
-                    "title": "Second card",
-                    "subtitle": "Element #2 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for second element in a generic bubble",
-                    }],
-                }]
-            }
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+	let messageData = {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "First card",
+					"subtitle": "Element #1 of an hscroll",
+					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+					"buttons": [{
+						"type": "web_url",
+						"url": "https://www.messenger.com",
+						"title": "web url"
+					}, {
+						"type": "postback",
+						"title": "Postback",
+						"payload": "Payload for first element in a generic bubble",
+					}],
+				}, {
+					"title": "Second card",
+					"subtitle": "Element #2 of an hscroll",
+					"image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+					"buttons": [{
+						"type": "postback",
+						"title": "Postback",
+						"payload": "Payload for second element in a generic bubble",
+					}],
+				}]
+			}
+		}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
+
+// spin spin sugar
+app.listen(app.get('port'), function() {
+	console.log('running on port', app.get('port'))
+})
