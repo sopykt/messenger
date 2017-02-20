@@ -38,19 +38,15 @@ app.post('/webhook/', function (req, res) {
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i]
 		let sender = event.sender.id
-		if (event.message && event.message.text) {
+                if (event.message && event.message.text) {
 			let text = event.message.text
 			if (text === 'Generic'){ 
 				console.log("welcome to chatbot")
 				sendGenericMessage(sender)
 				continue
 			}
-                        if (text === 'Hi'){ 
-				console.log("Greeting")
-				sendTextMessage(sender, "Hi Welcome to Health Info")
-				continue
-			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+
+		    sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
