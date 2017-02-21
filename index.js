@@ -50,6 +50,12 @@ app.post('/webhook/', function (req, res) {
 				sendTextMessage(sender, "Hi Welcome to Health Info")
 				continue
 			}
+			if (text === '???????'){
+				console.log("Greeting")
+				sendTextMessage(sender, "?????????????")
+				continue
+				
+			}
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
