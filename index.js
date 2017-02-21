@@ -50,9 +50,9 @@ app.post('/webhook/', function (req, res) {
 				sendTextMessage(sender, "Hi Welcome to Health Info")
 				continue
 			}
-			if (text === '???????'){
+			if (text === 'မဂၤလာပါ'){
 				console.log("Greeting")
-				sendTextMessage(sender, "?????????????")
+				sendTextMessage(sender, "မဂၤလာပါခင္ဗ်ာ")
 				continue
 				
 			}
