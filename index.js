@@ -56,6 +56,12 @@ app.post('/webhook/', function (req, res) {
 				continue
 				
 			}
+			if (text === 'သဲေလး'){
+				console.log("Honey")
+				sendTextMessage(sender, "ရွင့္")
+				continue
+				
+			}
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
